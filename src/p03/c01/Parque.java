@@ -70,9 +70,26 @@ public class Parque implements IParque{
 		
 	}
 	
-	// 
-	// TODO Método salirDelParque
-	//
+		public synchronized void salirDelParque(String puerta) { // TODO
+
+		// Si no hay entradas por esa puerta, inicializamos
+		if (contadoresPersonasPuerta.get(puerta) == null) {
+		 contadoresPersonasPuerta.put(puerta, 0);
+		 }
+
+		comprobarAntesDeSalir();
+		if (contadoresPersonasPuerta.get(puerta) >= 1) {
+			personaEnPuerta = true;
+			contadorPersonasTotales--;
+			contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta) - 1);
+
+			// Imprimimos el estado del parque
+			imprimirInfo(puerta, "Salida");
+		}
+		personaEnPuerta = false;
+		//notifyAll();
+
+	}
 	
 	
 	private void imprimirInfo (String puerta, String movimiento){
