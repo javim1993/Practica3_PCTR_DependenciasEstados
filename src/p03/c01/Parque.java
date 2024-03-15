@@ -46,29 +46,29 @@ public class Parque implements IParque{
 		//notifyAll();
 	}
 
-	public void entrarAlParque(String puerta){		// TODO
-		
+	@Override
+	public synchronized void entrarAlParque(String puerta) { // TODO
+
 		// Si no hay entradas por esa puerta, inicializamos
-		if (contadoresPersonasPuerta.get(puerta) == null){
+		if (contadoresPersonasPuerta.get(puerta) == null) {
 			contadoresPersonasPuerta.put(puerta, 0);
 		}
-		
-		// TODO
-				
-		
+
 		// Aumentamos el contador total y el individual
-		contadorPersonasTotales++;		
-		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta)+1);
-		
-		// Imprimimos el estado del parque
-		imprimirInfo(puerta, "Entrada");
-		
-		// TODO
-		
-		
-		// TODO
-		
+		comprobarAntesDeEntrar();
+		if (contadorPersonasTotales < CONTADORMAX) {
+			personaEnPuerta = true;
+			contadorPersonasTotales++;
+			contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta) + 1);
+
+			// Imprimimos el estado del parque
+			imprimirInfo(puerta, "Entrada");
+
+		}
+		personaEnPuerta = false;
+		//notifyAll();
 	}
+
 	
 	public synchronized void salirDelParque(String puerta) { // TODO
 
