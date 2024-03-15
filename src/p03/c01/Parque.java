@@ -5,7 +5,13 @@ import java.util.Hashtable;
 
 public class Parque implements IParque{
 
-
+	private boolean personaEnPuerta = false;
+	private int contadorPersonasTotales;
+	private int CONTADORMAX=50;
+	private Hashtable<String, Integer> contadoresPersonasPuerta;
+	/**Cerrojo, objeto de cualquier tipo*/
+	private static Object cerrojo =new Object();
+	
 	// TODO 
 	private int contadorPersonasTotales;
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
