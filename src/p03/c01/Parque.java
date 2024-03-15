@@ -121,11 +121,19 @@ public class Parque implements IParque{
 		
 	}
 
-	protected void comprobarAntesDeEntrar(){
-		//
-		// TODO
-		//
+	protected void comprobarAntesDeEntrar() {
+		synchronized (cerrojo) {
+			while (personaEnPuerta) {
+				try {
+					cerrojo.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			cerrojo.notifyAll();
+		}
 	}
+
 
 	protected void comprobarAntesDeSalir(){
 		//
