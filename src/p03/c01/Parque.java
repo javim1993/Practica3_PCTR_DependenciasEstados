@@ -70,7 +70,7 @@ public class Parque implements IParque{
 		
 	}
 	
-		public synchronized void salirDelParque(String puerta) { // TODO
+	public synchronized void salirDelParque(String puerta) { // TODO
 
 		// Si no hay entradas por esa puerta, inicializamos
 		if (contadoresPersonasPuerta.get(puerta) == null) {
