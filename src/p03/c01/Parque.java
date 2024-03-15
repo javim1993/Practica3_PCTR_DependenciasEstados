@@ -113,12 +113,22 @@ public class Parque implements IParque{
 	}
 	
 	protected void checkInvariante() {
-		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
-		// TODO 
-		// TODO
+		//aforo máximo
+		assert sumarContadoresPuerta() == contadorPersonasTotales
+				: "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
+		//menor o igual a 20 personas por puerta
+		for (String p : contadoresPersonasPuerta.keySet()) {
+			assert contadoresPersonasPuerta.get(p).equals(contadoresPersonasPuerta): "Las personas no superan 20 en la puerta "+p;
+		}
 		
-		
-		
+		assert contadorPersonasTotales >= 0
+				: "INV: El número total de personas no puede ser negativo";
+
+		//assert personas mayor a 0
+		for (String p : contadoresPersonasPuerta.keySet()) {
+			assert contadoresPersonasPuerta.get(p)>=0: "Las personas no son negativas en puerta "+p;
+		}
+
 	}
 
 	protected void comprobarAntesDeEntrar() {
