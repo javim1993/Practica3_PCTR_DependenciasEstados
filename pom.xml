@@ -1,4 +1,4 @@
-<project modelVersion="4.0.0">
+<project">
   <groupId>com.mycompany</groupId>
   <artifactId>mi-proyecto</artifactId>
   <version>1.0-SNAPSHOT</version>
