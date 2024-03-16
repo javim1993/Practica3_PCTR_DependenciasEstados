@@ -14,6 +14,7 @@ public class Parque implements IParque{
 	
 	// TODO 
 	private int contadorPersonasTotales;
+	// Hashtable para almacenar el número de personas que ingresan por cada puerta
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	
 	
@@ -107,7 +108,10 @@ public class Parque implements IParque{
 		}
 
 	}
-
+/**
+ * Método para verificar si hay personas en la puerta antes de que alguien entre al parque.
+ * Se sincroniza en el objeto cerrojo para garantizar la exclusión mutua.
+ */
 	protected void comprobarAntesDeEntrar() {
 		synchronized (cerrojo) {
 			while (personaEnPuerta) {
