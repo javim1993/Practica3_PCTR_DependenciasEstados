@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 public class ActividadEntradaPuerta implements Runnable{
 
-		private static final int NUMENTRADAS = 20;
+		private static final int NUMENTRADAS = 100;
 		private String puerta;
 		private IParque parque;
 
