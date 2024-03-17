@@ -24,6 +24,10 @@ public class Parque implements IParque{
 	}
 
 
+	/**
+	 * Metodo entrarAlParque implementado de la interfaz IParque
+	 * @param puerta puerta de entrada
+	 */
 	@Override
 	public synchronized void entrarAlParque(String puerta) { // TODO
 
@@ -31,42 +35,33 @@ public class Parque implements IParque{
 		if (contadoresPersonasPuerta.get(puerta) == null) {
 			contadoresPersonasPuerta.put(puerta, 0);
 		}
-
-		// Aumentamos el contador total y el individual
-		comprobarAntesDeEntrar();
-		if (contadorPersonasTotales < CONTADORMAX) {
-			personaEnPuerta = true;
+		if (contadoresPersonasPuerta.get(puerta) < 20 || contadorPersonasTotales <= CONTADORMAX) {
+			// Aumentamos el contador total y el individual
+			comprobarAntesDeEntrar();
 			contadorPersonasTotales++;
 			contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta) + 1);
-
-			// Imprimimos el estado del parque
-			imprimirInfo(puerta, "Entrada");
-
 		}
-		personaEnPuerta = false;
-		//notifyAll();
+		// Imprimimos el estado del parque
+		imprimirInfo(puerta, "Entrada");
+		checkInvariante();
 	}
 
-	
-	public synchronized void salirDelParque(String puerta) { // TODO
+	/**
+	 * Metodo salirDelParque implementado de la interfaz IParque
+	 * @param puerta puerta de salida
+	 */
+	@Override
+	public synchronized void salirDelParque(String puerta) { 
 
-		// Si no hay entradas por esa puerta, inicializamos
-		if (contadoresPersonasPuerta.get(puerta) == null) {
-		 contadoresPersonasPuerta.put(puerta, 0);
-		 }
-
-		comprobarAntesDeSalir();
-		if (contadoresPersonasPuerta.get(puerta) >= 1) {
-			personaEnPuerta = true;
+		if (contadoresPersonasPuerta.get(puerta) != null && contadoresPersonasPuerta.get(puerta) > 0) {
+			comprobarAntesDeSalir();
 			contadorPersonasTotales--;
 			contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta) - 1);
 
 			// Imprimimos el estado del parque
 			imprimirInfo(puerta, "Salida");
+			checkInvariante();
 		}
-		personaEnPuerta = false;
-		//notifyAll();
-
 	}
 	
 	
