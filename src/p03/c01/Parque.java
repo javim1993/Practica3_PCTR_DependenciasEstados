@@ -103,36 +103,39 @@ public class Parque implements IParque{
 		}
 
 	}
-/**
- * Método para verificar si hay personas en la puerta antes de que alguien entre al parque.
- * Se sincroniza en el objeto cerrojo para garantizar la exclusión mutua.
- */
+	/**
+	 * Método comprobarAntesDeEntrar 
+	 * Comprueban que antes de entrar no se llegue al valor máximo
+	 * Si llega se duermen los threads de entrada
+	 */
 	protected void comprobarAntesDeEntrar() {
-		synchronized (cerrojo) {
-			while (personaEnPuerta) {
-				try {
-					cerrojo.wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+		while (contadorPersonasTotales == CONTADORMAX)
+			try {
+				System.out.println("Sleep IN");
+				wait();
+				System.out.println("No sleep IN");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-			cerrojo.notifyAll();
-		}
+
+		System.out.println("IN despertar puertas");
 	}
 
-
+	/**
+	 * Método comprobarAntesDeSalir 
+	 * Comprueban que antes de entrar no se llegue al valor 0
+	 * Si llega se duermen los threads de salida
+	 */
 	protected void comprobarAntesDeSalir() {
-		synchronized (cerrojo) {
-			while (personaEnPuerta) {
-				try {
-					cerrojo.wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+		while (contadorPersonasTotales == 0) {
+			try {
+				System.out.println("Sleep OUT");
+				wait();
+				System.out.println("No sleep OUT");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-			cerrojo.notifyAll();
 		}
+		System.out.println("OUT despertar puertas");
 	}
-
-
 }
