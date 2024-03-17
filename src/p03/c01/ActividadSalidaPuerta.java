@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 public class ActividadSalidaPuerta implements Runnable{
 	/** Numero máximo de salidas por puerta*/
-	private static final int NUMSALIDAS = 100;
+	private static final int NUMSALIDAS = 20;
 	/** String que indica la puerta de salida*/
 	private String puerta;
 	/** Objeto de la interfaz Iparque*/
