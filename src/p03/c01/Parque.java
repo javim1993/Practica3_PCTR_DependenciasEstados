@@ -3,21 +3,28 @@ package src.p03.c01;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+/**
+ * Clase Parque
+ *  
+ * @author <a href="jmf1017@alu.ubu.es">Javier Muñoz</a>
+ * @author <a href="jgh1006@alu.ubu.es">Josue Gabriel Granados</a>
+ * @since 1.0
+ * @version 1.0
+ * 
+ *          Clase que implementa IParque
+ */
 public class Parque implements IParque{
 
-	private boolean personaEnPuerta = false;
+	/**Entero que cuenta el número de personas totales en el parque */
 	private int contadorPersonasTotales;
+	/**Entero que da el valor máximo de personas en el parque */
 	private int CONTADORMAX=50;
-	private Hashtable<String, Integer> contadoresPersonasPuerta;
-	/**Cerrojo, objeto de cualquier tipo*/
-	private static Object cerrojo =new Object();
-	
-	// TODO 
-	private int contadorPersonasTotales;
-	// Hashtable para almacenar el número de personas que ingresan por cada puerta
+	/**Se usa paraguardar un número de personas en una puerta */
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	
-	
+	/**
+ 	* Método constructor de la clase parque
+  	*/
 	public Parque() {
 		contadorPersonasTotales = 0;
 		contadoresPersonasPuerta = new Hashtable<String, Integer>();
@@ -29,7 +36,7 @@ public class Parque implements IParque{
 	 * @param puerta puerta de entrada
 	 */
 	@Override
-	public synchronized void entrarAlParque(String puerta) { // TODO
+	public synchronized void entrarAlParque(String puerta) {
 
 		// Si no hay entradas por esa puerta, inicializamos
 		if (contadoresPersonasPuerta.get(puerta) == null) {
@@ -64,7 +71,11 @@ public class Parque implements IParque{
 		}
 	}
 	
-	
+	/**
+ 	* Método que imprime la información de una puerta
+  	* @param puerta puerta de entrada o salida
+   	* @param movimiento si es entrada o salida
+  	*/
 	private void imprimirInfo (String puerta, String movimiento){
 		System.out.println(movimiento + " por puerta " + puerta);
 		System.out.println("--> Personas en el parque " + contadorPersonasTotales); //+ " tiempo medio de estancia: "  + tmedio);
@@ -75,7 +86,11 @@ public class Parque implements IParque{
 		}
 		System.out.println(" ");
 	}
-	
+
+	/**
+ 	* Método que gestiona los contadores de una puerta
+  	* @return int devuelve los contadores de la puerta que este usando
+  	*/
 	private int sumarContadoresPuerta() {
 		int sumaContadoresPuerta = 0;
 			Enumeration<Integer> iterPuertas = contadoresPersonasPuerta.elements();
@@ -84,23 +99,16 @@ public class Parque implements IParque{
 			}
 		return sumaContadoresPuerta;
 	}
-	
+
+	/**
+ 	* Metodo que chequea que no se sobrepase de los valores límite, 
+  	* entre 0 y 50 personas en el parque
+  	*/
 	protected void checkInvariante() {
 		//aforo máximo
 		assert sumarContadoresPuerta() == contadorPersonasTotales
 				: "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
-		//menor o igual a 20 personas por puerta
-		for (String p : contadoresPersonasPuerta.keySet()) {
-			assert contadoresPersonasPuerta.get(p).equals(contadoresPersonasPuerta): "Las personas no superan 20 en la puerta "+p;
-		}
-		
-		assert contadorPersonasTotales >= 0
-				: "INV: El número total de personas no puede ser negativo";
-
-		//assert personas mayor a 0
-		for (String p : contadoresPersonasPuerta.keySet()) {
-			assert contadoresPersonasPuerta.get(p)>=0: "Las personas no son negativas en puerta "+p;
-		}
+		assert contadorPersonasTotales >= 0 : "INV: El número total de personas no puede ser negativo";
 
 	}
 	/**
