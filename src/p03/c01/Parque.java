@@ -119,14 +119,10 @@ public class Parque implements IParque{
 	protected void comprobarAntesDeEntrar() {
 		while (contadorPersonasTotales == CONTADORMAX)
 			try {
-				System.out.println("Sleep IN");
 				wait();
-				System.out.println("No sleep IN");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
-		System.out.println("IN despertar puertas");
 	}
 
 	/**
@@ -137,13 +133,10 @@ public class Parque implements IParque{
 	protected void comprobarAntesDeSalir() {
 		while (contadorPersonasTotales == 0) {
 			try {
-				System.out.println("Sleep OUT");
 				wait();
-				System.out.println("No sleep OUT");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("OUT despertar puertas");
 	}
 }
