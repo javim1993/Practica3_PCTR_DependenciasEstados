@@ -1,5 +1,15 @@
 package src.p03.c01;
 
+/**
+ * Clase SistemaLanzador
+ *  
+ * @author <a href="jmf1017@alu.ubu.es">Javier Muñoz</a>
+ * @author <a href="jgh1006@alu.ubu.es">Josue Gabriel Granados</a>
+ * @since 1.0
+ * @version 1.0
+ * 
+ *          Clase SistemaLanzador que ejecuta el método main y crea 5 puertas con sus correspondientes thread de salida y de entrada
+ */
 public class SistemaLanzador {
 	public static void main(String[] args) {
 		/** Interfaz de tipo IParque */
