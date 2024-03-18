@@ -42,16 +42,17 @@ public class Parque implements IParque{
 		if (contadoresPersonasPuerta.get(puerta) == null) {
 			contadoresPersonasPuerta.put(puerta, 0);
 		}
-		if (contadoresPersonasPuerta.get(puerta) < 20 || contadorPersonasTotales <= CONTADORMAX) {
+		if (contadoresPersonasPuerta.get(puerta) < 20 || contadorPersonasTotales < CONTADORMAX) {
 			// Aumentamos el contador total y el individual
 			comprobarAntesDeEntrar();
 			contadorPersonasTotales++;
 			contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta) + 1);
+			// Imprimimos el estado del parque
+			imprimirInfo(puerta, "Entrada");
+			checkInvariante();
+			notifyAll();
 		}
-		// Imprimimos el estado del parque
-		imprimirInfo(puerta, "Entrada");
-		checkInvariante();
-		notifyAll();
+		
 	}
 
 	/**
