@@ -127,7 +127,7 @@ public class Parque implements IParque{
 			}
 	}
 
-	/**
+	/*
 	 * Método comprobarAntesDeSalir 
 	 * Comprueban que antes de entrar no se llegue al valor 0
 	 * Si llega se duermen los threads de salida
